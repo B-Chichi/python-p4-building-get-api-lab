@@ -98,6 +98,11 @@ class TestApp:
         '''returns JSON representing one models.Bakery object.'''
         with app.app_context():
             prices = [baked_good.price for baked_good in BakedGood.query.all()]
+            bg1 = BakedGood(name="Lemon Tart", price=4.25)
+            bg2 = BakedGood(name="Cinnamon Roll", price=5.00)
+            db.session.add_all([bg1, bg2])
+            db.session.commit()
+
             highest_price = max(prices)
 
             b1 = BakedGood(name="Madeleine", price=highest_price + 1)
